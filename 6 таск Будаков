@@ -1,0 +1,44 @@
+import java.util.Locale;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+        Locale.setDefault(Locale.ROOT);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("введите n");
+        int n=scanner.nextInt();
+        System.out.print("введите e");
+        double e=scanner.nextDouble();
+        System.out.print("введите x");
+        double x=scanner.nextDouble();
+        while (Math.abs(x)>1){
+            System.out.print("x должен быть в интервале [-1,1]. Введите x");
+            x=scanner.nextDouble();
+        }
+        int znak=-1;
+        double t=x*x*x;
+        double y=Math.log(t+1);
+        double e10=e/10.0;
+
+        double sum1=0,sum2=0,sum3=0,p;
+        double pr=1;
+        for (int i=1;i<=n;i++){
+            pr*=t;
+            znak=-znak;
+            p=znak*pr/i;
+
+            double pabs=Math.abs(p);
+            if(pabs>e){sum2+=p;}
+            else if(pabs>e10){sum3+=p;}
+            else  {sum1+=p;}
+        }
+
+
+        sum3+=sum2;
+        sum1+=sum3;
+        System.out.println("сумма n первых = "+sum1);
+        System.out.println("сумма n первых больше е = "+sum2);
+        System.out.println("сумма n первых больше е/10 = "+sum3);
+        System.out.println("Math.log(x^3+1) = "+y);
+    }
+}
